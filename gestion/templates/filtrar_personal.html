@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contend %}
+
+<div class="container-xxl mt-5">
+    <div class="row">
+        <div class="col">
+            <h2>Lista de Personal</h2>
+        </div>
+        <div class="col">
+            <div >
+                <form class="row g-3" method="POST" action="/filtrar_personal/">
+                    {% csrf_token %}
+                    <div class="col">
+                      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
+                    </div>
+
+                    <div class="col">
+                        <input type="number" class="form-control" id="nro" name="nro" placeholder="Nro Legajo">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-success">Filtrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col" style="text-align: center;">
+            <div>
+                <a href="reporte/" class="btn"><img src="{% static 'img/pdf.png' %}" style="width: 40px;"></a>
+            </div>  
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <table class="table table-dark" style="text-align: center;" id="personal">
+                <thead>
+                    <tr>
+                        <th>NRO LEGAJO</th>
+                        <th>APELLIDO</th>
+                        <th>NOMBRE</th>
+                        <th>DNI</th>
+                        <th>TELEFONO</th>
+                        <th>LOCALIDAD</th>
+                        <th>DIRECCION</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider"> 
+                    {% for i in personal %}
+                    <tr>
+                        <td>{{i.nro_legajo}}</td>
+                        <td>{{i.apellido}}</td>
+                        <td>{{i.nombre}}</td>
+                        <td>{{i.dni}}</td>
+                        <td>{{i.telefono}}</td>
+                        <td>{{i.localidad}}</td>
+                        <td>{{i.direccion}}</td>
+                        <td>
+                            <a href="ver_completo/{{i.nro_legajo}}" class="btn btn-primary btn-sm">Ver completo</a>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% for i in fecha %}
+    <h1>{{i}}</h1>
+    {% endfor %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready( function () {
+        $('#personal').DataTable({
+            searching: false,
+            ordering:  false,
+            info: false,
+            "pageLength": 5,
+            "lengthMenu": [ 5, 10, 25, 50, 75, 100 ]
+        })
+    } );
+</script>
+
+{% endblock contend %}
+    

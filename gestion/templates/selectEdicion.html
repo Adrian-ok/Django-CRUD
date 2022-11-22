@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contend %}
+
+<div class="container mt-4">
+    <form class="row g-3" method="POST" action="/editar_personal/">
+      {% csrf_token %}
+      <div class="col-3">
+        <label for="nro_legajo" class="form-label">Nro Legajo</label>
+        <input type="hidden" name="id" id="id" value="{{edicion.id}}">
+        <input type="number" class="form-control" id="nro_legajo" name="nro_legajo" value="{{edicion.nro_legajo}}" required autofocus>
+      </div>
+      <div class="col-3">
+        <label for="apellido" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" value="{{edicion.apellido}}" maxlength="100" required >
+      </div>
+      <div class="col-3">
+        <label for="nombre" class="form-label">Nombres</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="{{edicion.nombre}}" maxlength="100" required>
+      </div>
+      <div class="col-3">
+          <label for="dni" class="form-label">DNI</label>
+          <input type="number" class="form-control" id="dni" name="dni" value="{{edicion.dni}}" required>
+      </div>
+      
+      
+      <div class="col-3">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="number" class="form-control" id="telefono" name="telefono" value="{{edicion.telefono}}" required>
+      </div>
+      <div class="col-3">
+        <label for="direccion" class="form-label">Direccion</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" value="{{edicion.direccion}}" required>
+      </div>
+      <div class="col-3">
+        <label for="localidadd" class="form-label">Localidad</label>
+        <select class="form-select" id="localidadd" name="localidadd" required>
+          {% for i in localidad %}
+          <option value="{{ i.id_localidad }}"
+          {% if edicion.localidad == i %}
+          selected
+          {% endif %}
+          >{{ i.localidad }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="grup_sangree" class="form-label">Grupo sangineo</label>
+        <select class="form-select" id="grup_sangree" name="grup_sangree" required>
+          {% for i in sangre %}
+          <option value="{{ i.id_sangre }}"
+          {% if edicion.grup_sangre == i %}
+          selected
+          {% endif %}
+          >{{ i.sangre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <div class="col-3">
+        <label for="estadoC" class="form-label">Estado Civil</label>
+        <select class="form-select" id="estadoC" name="estadoC" required>
+          {% for i in estado %}
+          <option value="{{ i.id_estado }}"
+          {% if edicion.estado == i %}
+          selected
+          {% endif %}
+          >{{ i.estado }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="cant_hijos" class="form-label">Cant hijos</label>
+        <input type="number" class="form-control" id="cant_hijos" name="cant_hijos" value="{{edicion.cant_hijos}}" required>
+      </div>
+      <div class="col-3">
+        <label for="instruccion" class="form-label">Instruccion</label>
+        <select class="form-select" id="instruccion" name="instruccion" required>
+          {% if edicion.instruccion == 'P' %}
+          <option value="P">Primaria</option>
+          {% elif edicion.instruccion == 'S' %}
+          <option value="S">Secundaria</option>
+          {% elif edicion.instruccion == 'T' %}
+          <option value="T">Terciaria</option>
+          {% elif edicion.instruccion == 'U' %}
+          <option value="U">Universitaria</option>
+          {% endif %}
+        </select>
+      </div>
+      <div class="col-3">
+          <label for="titulo" class="form-label">Titulo</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" value="{{edicion.titulo}}" required>
+      </div>
+
+
+      <div class="col-3">
+        <label for="fn" class="form-label">Fecha Nacimiento</label>
+        <input type="date" class="form-control" id="fn" name="fn" value="{{edicion.fn}}" required>
+      </div>
+      <div class="col-3">
+        <label for="fi" class="form-label">Fecha Ingreso</label>
+        <input type="date" class="form-control" id="fi" name="fi" value="{{edicion.fi}}" required>
+      </div>
+      <div class="col-3">
+          <label for="renovacion" class="form-label">Renovacion Libreta</label>
+          <input type="date" class="form-control" id="renovacion" name="renovacion" value="{{edicion.renovacion}}" required>
+      </div>
+      <div class="col-3">
+          <label for="venc_libreta" class="form-label">Vencimiento Libreta</label>
+          <input type="date" class="form-control" id="venc_libreta" name="venc_libreta" value="{{edicion.venc_libreta}}" required>
+      </div>
+
+
+      <div class="col-3">
+        <label for="sectorr" class="form-label">Sector</label>
+        <select class="form-select" id="sectorr" name="sectorr" required>
+          {% for i in sector %}
+          <option value="{{ i.id_sector }}"
+          {% if edicion.sector == i %}
+          selected
+          {% endif %}
+          >{{ i.nom_sector }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3 mt-5">
+        <div class="form-check">
+          {% if edicion.casa == True %}
+            <input class="form-check-input" type="checkbox" id="casa" name="casa" value="yes" checked>
+          {% else %}
+            <input class="form-check-input" type="checkbox" id="casa" name="casa" value="yes">
+          {% endif %}
+          <label class="form-check-label" for="casa">
+            Casa Propia
+          </label>
+        </div>
+      </div>
+
+        <button class="btn btn-primary" type="submit">Guardar</button>
+        <a href="/home/" class="btn btn-secondary" >Cancelar</a>
+
+      </form>
+</div>
+
+{% endblock contend %}
+    
+
+

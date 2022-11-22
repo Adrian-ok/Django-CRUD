@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block contend %}
+<div class="container-xxl mt-5" >
+    <div class="row">
+        <div class="col">
+            <h2>Libretas Vencidas</h2>
+        </div>
+        <div class="col">
+            <form class="row g-3" method="POST" action="/vencidos/">
+                {% csrf_token %}
+                <div class="col">
+                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
+                </div>
+
+                <div class="col">
+                    <input type="number" class="form-control" id="nro" name="nro" placeholder="Nro Legajo">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-success">Filtrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col" style="text-align: center;">
+            <div>
+                <a href="reportevenci/" class="btn"><img src="{% static 'img/pdf.png' %}" style="width: 40px;"></a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <table class="table table-dark" style="text-align: center;" id="vencidos">
+                <thead>
+                    <tr>
+                        <th>NRO LEGAJO</th>
+                        <th>APELLIDO</th>
+                        <th>NOMBRE</th>
+                        <th>DNI</th>
+                        <th>TELEFONO</th>
+                        <th>RENOVO LIB</th>
+                        <th>VENCIMIENTO LIB</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider"> 
+                    {% for i in venci %}
+                    <tr>
+                        <td>{{i.nro_legajo}}</td>
+                        <td>{{i.apellido}}</td>
+                        <td>{{i.nombre}}</td>
+                        <td>{{i.dni}}</td>
+                        <td>{{i.telefono}}</td>
+                        <td>{{i.renovacion}}</td>
+                        <td>{{i.venc_libreta}}</td>
+                        <td>
+                            <a href="selectEdicion/{{i.id}}" class="btn btn-warning btn-sm">Actualizar</a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready( function () {
+        $('#vencidos').DataTable({
+            searching: false,
+            ordering:  false,
+            info: false,
+            "pageLength": 5,
+            "lengthMenu": [ 5, 10, 25, 50, 75, 100 ]
+        })
+    } );
+</script>
+
+{% endblock contend %}
+    

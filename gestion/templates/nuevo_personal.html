@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contend %}
+
+<div class="container mt-5">
+    <form class="row g-3" method="POST">
+      {% csrf_token %}
+      <div class="col-3">
+        <label for="nro_legajo" class="form-label">Nro Legajo</label>
+        <input type="number" class="form-control" id="nro_legajo" name="nro_legajo" required autofocus>
+      </div>
+      <div class="col-3">
+        <label for="apellido" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" required >
+      </div>
+      <div class="col-3">
+        <label for="nombre" class="form-label">Nombres</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
+      </div>
+      <div class="col-3">
+          <label for="dni" class="form-label">DNI</label>
+          <input type="number" class="form-control" id="dni" name="dni" required>
+      </div>
+      
+      
+      <div class="col-3">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="number" class="form-control" id="telefono" name="telefono" required>
+      </div>
+      <div class="col-3">
+        <label for="direccion" class="form-label">Direccion</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" required>
+      </div>
+      <div class="col-3">
+        <label for="localidadd" class="form-label">Localidad</label>
+        <select class="form-select" id="localidadd" name="localidadd" required>
+          <option value="1">Seleccione localidad</option>
+          {% for i in localidad %}
+          <option value="{{ i.id_localidad }}">{{ i.localidad }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="grup_sangree" class="form-label">Grupo sangineo</label>
+        <select class="form-select" id="grup_sangree" name="grup_sangree" required>
+          <option value="1">Seleccione grup sangineo</option>
+          {% for i in sangre %}
+          <option value="{{ i.id_sangre }}">{{ i.sangre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <div class="col-3">
+        <label for="estadoC" class="form-label">Estado Civil</label>
+        <select class="form-select" id="estadoC" name="estadoC" required>
+          <option value="1">Seleccione estd civil</option>
+          {% for i in estado %}
+          <option value="{{ i.id_estado }}">{{ i.estado }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="cant_hijos" class="form-label">Cant hijos</label>
+        <input type="number" class="form-control" id="cant_hijos" name="cant_hijos" required>
+      </div>
+      <div class="col-3">
+        <label for="instruccion" class="form-label">Instruccion</label>
+        <select class="form-select" id="instruccion" name="instruccion" required>
+          <option value="S">Seleccione Instruccion</option>
+          <option value="P">Primaria</option>
+          <option value="S">Secundaria</option>
+          <option value="T">Terciaria</option>
+          <option value="U">Universitaria</option>
+        </select>
+      </div>
+      <div class="col-3">
+          <label for="titulo" class="form-label">Titulo</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" required>
+      </div>
+
+
+      <div class="col-3">
+        <label for="fn" class="form-label">Fecha Nacimiento</label>
+        <input type="date" class="form-control" id="fn" name="fn" required>
+      </div>
+      <div class="col-3">
+        <label for="fi" class="form-label">Fecha Ingreso</label>
+        <input type="date" class="form-control" id="fi" name="fi" required>
+      </div>
+      <div class="col-3">
+          <label for="renovacion" class="form-label">Renovacion Libreta</label>
+          <input type="date" class="form-control" id="renovacion" name="renovacion" required>
+      </div>
+      <div class="col-3">
+          <label for="venc_libreta" class="form-label">Vencimiento Libreta</label>
+          <input type="date" class="form-control" id="venc_libreta" name="venc_libreta" required>
+      </div>
+
+
+      <div class="col-3">
+        <label for="sectorr" class="form-label">Sector</label>
+        <select class="form-select" id="sectorr" name="sectorr" required>
+          <option value="1">Seleccione sector</option>
+          {% for i in sector %}
+          <option value="{{ i.id_sector }}">{{ i.nom_sector }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3 mt-5">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="casa" name="casa" value="yes">
+          <label class="form-check-label" for="casa">
+            Casa Propia
+          </label>
+        </div>
+      </div>
+
+        <button class="btn btn-primary" type="submit">Guardar</button>
+
+      </form>
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+                'tittle': 'Atencion',
+                'text': '{{m}}',
+                'icon': 'success'
+            })
+        </script>
+    {% endfor %}
+{% endif %}
+
+{% endblock contend %}
+    

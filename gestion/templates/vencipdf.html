@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+</style>
+<body>
+    <h1 >LIBRETAS VENCIDAS COFRA</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>NRO LEGAJO</th>
+                    <th>APELLIDO</th>
+                    <th>NOMBRE</th>
+                    <th>DNI</th>
+                    <th>TELEFONO</th>
+                    <th>FECHA VENCIMIENTO</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in venci %}
+                <tr style="text-align: center;">
+                    <td>{{i.nro_legajo}}</td>
+                    <td>{{i.apellido}}</td>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.dni}}</td>
+                    <td>{{i.telefono}}</td>
+                    <td>{{i.venc_libreta}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

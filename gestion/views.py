@@ -1,6 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import formPersona
 from datetime import datetime ,timedelta, date
 from django.contrib import messages
 from .fecha import *
@@ -224,7 +223,6 @@ def vencidos(request):
 
 #-----------------------------------------------------------------------------------------------------------------------#
 #CREAR EL REPORTE DE TODOS LOS EMPLEADOS 
-import os
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import get_template
